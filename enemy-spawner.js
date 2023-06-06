@@ -7,17 +7,14 @@ AFRAME.registerComponent('enemy-spawner', {
             var enemyEl = document.createElement('a-box');
             enemyEl.setAttribute('color', 'red');
             enemyEl.setAttribute('position', {
-                x: 5,
+                x: Math.random() * 10 - 5,
                 y: 1,
-                z:5
+                z: Math.random() * 10 - 5
             });
             sceneEl.appendChild(enemyEl);
         }
 
         // Utilisation de setInterval pour créer un nouvel ennemi toutes les 5 secondes
         setInterval(createEnemy, 5000);
-        console.log("Le composant enemy-spawner est initialisé.");
-
     }
 });
-
