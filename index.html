@@ -2,20 +2,19 @@
 <html lang="en">
 
 <head>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My FPS Game</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 </head>
 
 <body>
-
     <a-scene>
         <a-sky color="#245"></a-sky>
 
 
-        <a-plane color="#666" position="0 10 -2 rotation=" -90 0 0 " width="20 " height="7 ">
+        <a-plane color="#666" position="0 10 -2" width="20 " height="7 ">
             <a-text value="Defis HDM " align="center " color="#FFF " width="50 "></a-text>
         </a-plane>
 
@@ -32,6 +31,8 @@
         <a-entity id="enemies ">
             <a-entity class="enemy " obj-model="obj: url(./assets/Goblin.obj); mtl: url(./assets/Goblin.mtl) " position="3 0 -5 "></a-entity>
         </a-entity>
+
+        <a-entity id="spawn ennemie" enemy-spawner></a-entity>
 
 
     </a-scene>
