@@ -18,8 +18,10 @@ AFRAME.registerComponent('bullet-collision', {
                 bullet.parentNode.removeChild(bullet);
                 zombie.parentNode.removeChild(zombie);
             }
+
         });
     }
+
 });
 
 AFRAME.registerComponent('enemy-spawner', {

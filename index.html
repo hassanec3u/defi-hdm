@@ -7,30 +7,30 @@
     <title>Document</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.physics.min.js"></script>
     <script src="./simple-navmesh-constraint.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe-extras/6.1.0/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
 
-
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
 
 
 </head>
 
 
 <body>
-    <a-scene physics="driver: ammo">
+    <a-scene physics="debug :true">
         <a-assets>
             <a-asset-item id="village" src="./assets/Miasto scena.glb"></a-asset-item>
             <a-asset-item id="zombie" src="./assets/zombie_walk_test.glb"></a-asset-item>
             <a-asset-item id="weapon" src="./assets/weapon/scene.gltf"></a-asset-item>
             <a-asset-item id="bulletModel" src="./assets/bullet.glb"></a-asset-item>
+            <a-asset-item id="car" src="./assets/car.glb"></a-asset-item>
+            <img id="crosshair" src="./assets/crosshair.png" alt="" srcset="">
             <img id="crosshair" src="./assets/crosshair.png" alt="" srcset="">
             <audio id="shootSound" src="./assets/cannon_fire.ogg"></audio>
 
         </a-assets>
 
-        <a-entity id="player" position="0 1.9 0" camera look-controls="pointerLockEnabled: true; sensitivity: 0.5" wasd-controls look-controls user-height="1.6" raycaster dynamic-body aabb-collider="objects: .enemy" geometry="primitive: box; width: 0.5; height: 1.8; depth: 0.5"
-            material="visible: false">
+        <a-entity id="player" position="0 1.9 0" camera look-controls="pointerLockEnabled: true; sensitivity: 0.5" wasd-controls look-controls user-height="1.6" raycaster static-body="shape: box">
             <a-entity gltf-model="./assets/weapon/scene.gltf" scale="2 2 2" position="0.19 -0.48 -0.15" rotation="0 180 0"></a-entity>
             <a-entity position="0 0 -0.5">
                 <a-image src="#crosshair" width="0.05" height="0.05"></a-image>
@@ -38,10 +38,10 @@
         </a-entity>
 
 
-        <a-entity gltf-model="#village" static-body collision-filter="group: walls; collidesWith: player"></a-entity>
 
-        <a-entity enemy-spawner collision-filter="group: zombies; collidesWith: bullets, player" enemy static-body></a-entity>
-
+        <a-entity gltf-model="#village" static-body="shape: auto;"></a-entity>
+        <a-entity gltf-model="./assets/car.glb" dynamic-body="shape: box; " position="5.881 0.296 9.441" velocity=""></a-entity>
+        <a-entity enemy-spawner enemy dynamic-body="shape: box;"></a-entity>
     </a-scene>
 
     <script src="./test.js"></script>
