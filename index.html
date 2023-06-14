@@ -2,41 +2,48 @@
 <html lang="en">
 
 <head>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="enemy-spawner.js"></script>
-
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My FPS Game</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.0/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment- component/dist/aframe-environment-component.min.js"></script>
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.physics.min.js"></script>
+    <script src="./simple-navmesh-constraint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe-extras/6.1.0/aframe-extras.min.js"></script>
+
+
+
+
 </head>
 
+
 <body>
-    <a-scene physics="debug: true" enemy-spawner>
+    <a-scene physics="driver: ammo">
         <a-assets>
-            <a-asset-item id="enemy" src="/assets/abomination.glb"></a-asset-item>
-            <a-asset-item id="sol" src="/assets/floor_tiles.glb"></a-asset-item>
-            <a-asset-item id="arme" src="/assets/arx-160_weapon.glb"></a-asset-item>
+            <a-asset-item id="village" src="./assets/Miasto scena.glb"></a-asset-item>
+            <a-asset-item id="zombie" src="./assets/zombie_walk_test.glb"></a-asset-item>
+            <a-asset-item id="weapon" src="./assets/weapon/scene.gltf"></a-asset-item>
+            <a-asset-item id="bulletModel" src="./assets/bullet.glb"></a-asset-item>
+            <img id="crosshair" src="./assets/crosshair.png" alt="" srcset="">
+            <audio id="shootSound" src="./assets/cannon_fire.ogg"></audio>
+
         </a-assets>
-        <a-sky color="#87ceeb"></a-sky>
-        <a-entity dynamic-body camera position="0 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls look-controls user-height="1.6" raycaster dynamic-body>
-            <a-entity position="0 0 -1">
-                <a-entity gltf-model="/assets/arx-160_weapon.glb" position="0.05 -0.7 1.07" scale="0.05 0.05 0.05" rotation="0 95.42 14"></a-entity>
+
+        <a-entity id="player" position="0 1.9 0" camera look-controls="pointerLockEnabled: true; sensitivity: 0.5" wasd-controls look-controls user-height="1.6" raycaster dynamic-body aabb-collider="objects: .enemy" geometry="primitive: box; width: 0.5; height: 1.8; depth: 0.5"
+            material="visible: false">
+            <a-entity gltf-model="./assets/weapon/scene.gltf" scale="2 2 2" position="0.19 -0.48 -0.15" rotation="0 180 0"></a-entity>
+            <a-entity position="0 0 -0.5">
+                <a-image src="#crosshair" width="0.05" height="0.05"></a-image>
             </a-entity>
         </a-entity>
-        <a-plane static-body color="#666" position="0 25 0" rotation="0 0 0" width="40" height="7">
-            <a-text value="Defis HDM" align="center" color="#FFF" width="50"></a-text>
-        </a-plane>
-        <!-- Ajout d'un sol -->
-        <a-gltf-model src="#sol" rotation="0 0 0.01" scale="0.19 0.64 0.42" position="44.45 -2.79 0.29" static-body></a-gltf-model>
-        <!-- Ajout d'ennemis -->
-        <a-entity gltf-model="#enemy" position="0 0 -12" scale="0.2 0.2 0.2" animation-mixer="clip: *" dynamic-body></a-entity>
+
+
+        <a-entity gltf-model="#village" static-body collision-filter="group: walls; collidesWith: player"></a-entity>
+
+        <a-entity enemy-spawner collision-filter="group: zombies; collidesWith: bullets, player" enemy static-body></a-entity>
 
     </a-scene>
+
     <script src="./test.js"></script>
 </body>
 
